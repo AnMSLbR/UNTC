@@ -4,9 +4,72 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UNTC"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d" MinHeight="450" MinWidth="800"
+        Title="UNTC" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*" MaxWidth="450"/>
+            <ColumnDefinition Width="55*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="#FF3F374C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17"/>
+                <RowDefinition Height="331*"/>
+                <RowDefinition Height="29*" MaxHeight="60"/>
+                <RowDefinition Height="17"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
+                      RowStyle="{DynamicResource DataGridRowStyle}" Grid.Column="1" 
+                      Grid.Row="1" Grid.ColumnSpan="3"
+                      ItemsSource="{Binding Boreholes}">
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Название" Binding="{Binding Title}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
+                    <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
+
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 5 0">
+                                    <Button x:Name="editBtn" Style="{StaticResource DataGridButton}">
+                                        <Icon:PackIconMaterial Kind="PencilOutline"
+                                                               Style="{StaticResource ButtonIcon}"/>
+                                    </Button>
+                                    <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline"
+                                                               Style="{StaticResource ButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource AddButton}">
+                <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
+            </Button>
+        </Grid>
+
+   
     </Grid>
 </Window>
