@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="UNTC.Views.AddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:EToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:UNTC.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="416" d:DesignWidth="420">
+    <Grid Background="#FFC4C8EA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Создать" 
+                   FontSize="26" VerticalAlignment="Bottom" Margin="0 15 0 0"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Название" 
+                   FontSize="16" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" FontSize="16" 
+                 VerticalAlignment="Center" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Глубина" 
+                   FontSize="16" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
+
+        <EToolkit:DoubleUpDown x:Name="TBDepth" Grid.Row="4" Grid.Column="1" FontSize="16"
+                               VerticalAlignment="Center" PreviewTextInput="TBDepth_PreviewTextInput"
+                               ShowButtonSpinner="False"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="Плотность жидкости" 
+                   FontSize="16" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
+        <EToolkit:DoubleUpDown x:Name="TBDensity" Grid.Row="6" Grid.Column="1" FontSize="16" 
+                 VerticalAlignment="Center" PreviewTextInput="TBDensity_PreviewTextInput" ShowButtonSpinner="False"/>
+
+    </Grid>
+</UserControl>

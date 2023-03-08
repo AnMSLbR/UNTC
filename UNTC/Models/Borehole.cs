@@ -9,7 +9,7 @@ namespace UNTC.Models
     internal class Borehole
     {
         public string Title { get; set; }
-        public int Depth { get; set; }
+        public double Depth { get; set; }
         public double Density { get; set; }
     }
 }

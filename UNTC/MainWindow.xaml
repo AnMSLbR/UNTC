@@ -16,9 +16,7 @@
         <Grid Grid.Column="0" Background="#FF3F374C">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="90*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -31,7 +29,7 @@
             <DataGrid Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
                       RowStyle="{DynamicResource DataGridRowStyle}" Grid.Column="1" 
-                      Grid.Row="1" Grid.ColumnSpan="3"
+                      Grid.Row="1"
                       ItemsSource="{Binding Boreholes}">
                 <DataGrid.Columns>
 
@@ -65,11 +63,27 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource AddButton}">
+            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource AddButton}">
                 <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
             </Button>
         </Grid>
+        
+        <Grid Grid.Column="1" Background="#FF3F374C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="17"/>
+            </Grid.RowDefinitions>
 
-   
+            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="IBeam" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!--<Border Background="#FFC4C8EA"/>-->
+            </ContentControl>
+        </Grid>
+
     </Grid>
 </Window>
