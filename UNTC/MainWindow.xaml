@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:UNTC.Views"
+        xmlns:viewmodels="clr-namespace:UNTC.ViewModels"
         xmlns:local="clr-namespace:UNTC"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d" MinHeight="450" MinWidth="800"
@@ -52,7 +54,8 @@
                                         <Icon:PackIconMaterial Kind="PencilOutline"
                                                                Style="{StaticResource ButtonIcon}"/>
                                     </Button>
-                                    <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}">
+                                    <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}"
+                                        Command="{Binding Path=DataContext.NavigationViewModel.NavigateDataCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
                                         <Icon:PackIconMaterial Kind="DeleteOutline"
                                                                Style="{StaticResource ButtonIcon}"/>
                                     </Button>
@@ -63,11 +66,12 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource AddButton}">
+            <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource AddButton}"
+                    Command="{Binding NavigationViewModel.NavigateAddCommand}">
                 <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
             </Button>
         </Grid>
-        
+
         <Grid Grid.Column="1" Background="#FF3F374C">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
@@ -80,8 +84,17 @@
                 <RowDefinition Height="17"/>
             </Grid.RowDefinitions>
 
-            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="IBeam" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!--<Border Background="#FFC4C8EA"/>-->
+            <Border Grid.Row="1" Grid.Column="1" Background="#FFC4C8EA"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="IBeam" Background="Black" 
+                            Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate x:Name="addViewTemplate" DataType="{x:Type viewmodels:AddViewModel}">
+                        <views:AddView/>
+                    </DataTemplate>
+                    <DataTemplate x:Name="dataViewTemplate" DataType="{x:Type viewmodels:DataViewModel}">
+                        <views:DataView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
             </ContentControl>
         </Grid>
 

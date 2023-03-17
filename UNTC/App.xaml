@@ -23,7 +23,7 @@
             <Setter Property="CanUserResizeColumns" Value="False"/>
             <Setter Property="CanUserReorderColumns" Value="False"/>
             <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="ColumnWidth" Value="*"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="Template">
@@ -310,8 +310,8 @@
         </Style>
 
         <Style x:Key="ButtonIcon" TargetType="Icon:PackIconMaterial">
-            <Setter Property="Width" Value="12"/>
-            <Setter Property="Height" Value="12"/>
+            <Setter Property="Width" Value="14"/>
+            <Setter Property="Height" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 

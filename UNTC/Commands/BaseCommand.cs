@@ -7,29 +7,17 @@ using System.Windows.Input;
 
 namespace UNTC.Commands
 {
-    internal class BaseCommand : ICommand
+    internal abstract class BaseCommand : ICommand
     {
-        private Action<object> _execute;
-        private Func<object, bool> _canExecute;
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-        public BaseCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        {
-            _execute = execute;
-            _canExecute = canExecute;
-        }
+        public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute(parameter);
-        }
+        public virtual bool CanExecute(object parameter) => true;
 
-        public void Execute(object parameter)
+        public abstract void Execute(object parameter);
+
+        protected void OnCanExecuteChanged()
         {
-            _execute(parameter);
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
