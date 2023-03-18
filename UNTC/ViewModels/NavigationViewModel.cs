@@ -14,10 +14,10 @@ namespace UNTC.ViewModels
         public ICommand NavigateDataCommand { get; }
         public ICommand NavigateAddCommand { get; }
 
-        public NavigationViewModel(NavigationService<DataViewModel> dataNavigationService, NavigationService<AddViewModel> addNavigationService)
+        public NavigationViewModel(INavigationService dataNavigationService, INavigationService addNavigationService)
         {
-            NavigateDataCommand = new NavigateCommand<DataViewModel>(dataNavigationService);
-            NavigateAddCommand = new NavigateCommand<AddViewModel>(addNavigationService);
+            NavigateDataCommand = new NavigateCommand(dataNavigationService);
+            NavigateAddCommand = new NavigateCommand(addNavigationService);
         }
 
     }

@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="UNTC.Components.BoreholeDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:loc="clr-namespace:UNTC"
+             xmlns:local="clr-namespace:UNTC.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="331*"/>
+            <RowDefinition Height="29*" MaxHeight="60"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
+                      RowStyle="{DynamicResource DataGridRowStyle}"
+                      Grid.Row="0"
+                      ItemsSource="{Binding Boreholes}">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
+                <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
+
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 5 0">
+                                <Button x:Name="editBtn" Style="{StaticResource DataGridButton}">
+                                    <Icon:PackIconMaterial Kind="PencilOutline"
+                                                               Style="{StaticResource ButtonIcon}"/>
+                                </Button>
+                                <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}"
+                                        Command="{Binding Path=DataContext.NavigationViewModel.NavigateDataCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
+                                    <Icon:PackIconMaterial Kind="DeleteOutline"
+                                                               Style="{StaticResource ButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2" Style="{StaticResource AddButton}"
+                    Command="{Binding NavigationViewModel.NavigateAddCommand}">
+            <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
+        </Button>
+
+    </Grid>
+</UserControl>

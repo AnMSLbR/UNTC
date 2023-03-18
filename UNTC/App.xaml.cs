@@ -11,38 +11,39 @@ using UNTC.ViewModels;
 
 namespace UNTC
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private readonly NavigationStore _navigationStore;
         private readonly BoreholeStore _boreholeStore;
-        private readonly NavigationViewModel _navigationViewModel;
 
         public App()
         {
             _navigationStore = new NavigationStore();
             _boreholeStore = new BoreholeStore();
-            _navigationViewModel = new NavigationViewModel(CreateDataNavigationService(), CreateAddNavigationService());
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            NavigationService<DataViewModel> dataNavigationService = CreateDataNavigationService();
+            INavigationService dataNavigationService = CreateDataNavigationService();
             dataNavigationService.Navigate();
-            new MainWindow() { DataContext = new MainViewModel(_navigationStore, _navigationViewModel) }.Show();
+            new MainWindow() { DataContext = new MainViewModel(_navigationStore) }.Show();
             base.OnStartup(e);
         }
 
-        private NavigationService<DataViewModel> CreateDataNavigationService()
+        private INavigationService CreateDataNavigationService()
         {
-            return new NavigationService<DataViewModel>(_navigationStore, () => new DataViewModel(_boreholeStore));
+            return new LayoutNavigationService<DataViewModel>(
+                _navigationStore, () => new DataViewModel(_boreholeStore), () => new CommonViewModel(_boreholeStore, CreateNevigationViewModel));
         }
 
-        private NavigationService<AddViewModel> CreateAddNavigationService()
+        private INavigationService CreateAddNavigationService()
         {
-            return new NavigationService<AddViewModel>(_navigationStore, () => new AddViewModel(_navigationViewModel, _boreholeStore, CreateDataNavigationService()));
+            return new LayoutNavigationService<AddViewModel>(
+                _navigationStore, () => new AddViewModel(_boreholeStore, CreateDataNavigationService()), () => new CommonViewModel(_boreholeStore, CreateNevigationViewModel));
+        }
+        private NavigationViewModel CreateNevigationViewModel()
+        {
+            return new NavigationViewModel(CreateDataNavigationService(), CreateAddNavigationService());
         }
     }
 }

@@ -9,12 +9,11 @@ using UNTC.ViewModels;
 
 namespace UNTC.Commands
 {
-    internal class NavigateCommand<TViewModel> : BaseCommand
-        where TViewModel : BaseViewModel
+    internal class NavigateCommand : BaseCommand
     {
-        private readonly NavigationService<TViewModel> _navigationService;
+        private readonly INavigationService _navigationService;
 
-        public NavigateCommand(NavigationService<TViewModel> navigationService)
+        public NavigateCommand(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }

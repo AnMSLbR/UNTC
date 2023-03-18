@@ -15,8 +15,9 @@ namespace UNTC.ViewModels
     internal class AddViewModel : BaseViewModel
     {
         private Borehole _borehole;
-        public NavigationViewModel NavigationViewModel { get; }
+        //public NavigationViewModel NavigationViewModel { get; }
         public ICommand NavigateDataCommand { get; }
+        public ICommand SaveBoreholeCommand { get; }
         public string Title 
         {
             get => _borehole.Title;
@@ -46,13 +47,12 @@ namespace UNTC.ViewModels
         }
 
 
-        public AddViewModel(NavigationViewModel navigationViewModel, BoreholeStore boreholeStore, NavigationService<DataViewModel> dataNavigationService)
+        public AddViewModel(/*NavigationViewModel navigationViewModel,*/ BoreholeStore boreholeStore, INavigationService dataNavigationService)
         {
-            NavigationViewModel = navigationViewModel;
+            //NavigationViewModel = navigationViewModel;
             _borehole = new Borehole();
-            boreholeStore.CurrentBorehole = _borehole;
-            //NavigateDataCommand = new NavigateCommand<DataViewModel>(dataNavigationService);
+            NavigateDataCommand = new NavigateCommand(dataNavigationService);
+            SaveBoreholeCommand = new SaveBoreholeCommand(boreholeStore, _borehole);
         }
-
     }
 }

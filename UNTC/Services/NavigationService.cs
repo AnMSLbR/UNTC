@@ -8,8 +8,7 @@ using UNTC.ViewModels;
 
 namespace UNTC.Services
 {
-    internal class NavigationService<TViewModel>
-        where TViewModel : BaseViewModel
+    internal class NavigationService<TViewModel> : INavigationService where TViewModel : BaseViewModel
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;

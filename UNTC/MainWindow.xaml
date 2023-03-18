@@ -7,96 +7,20 @@
         xmlns:viewmodels="clr-namespace:UNTC.ViewModels"
         xmlns:local="clr-namespace:UNTC"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:components="clr-namespace:UNTC.Components"
         mc:Ignorable="d" MinHeight="450" MinWidth="800"
         Title="UNTC" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="45*" MaxWidth="450"/>
-            <ColumnDefinition Width="55*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0" Background="#FF3F374C">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="90*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="17"/>
-                <RowDefinition Height="331*"/>
-                <RowDefinition Height="29*" MaxHeight="60"/>
-                <RowDefinition Height="17"/>
-            </Grid.RowDefinitions>
-
-            <DataGrid Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
-                      RowStyle="{DynamicResource DataGridRowStyle}" Grid.Column="1" 
-                      Grid.Row="1"
-                      ItemsSource="{Binding Boreholes}">
-                <DataGrid.Columns>
-
-                    <DataGridTextColumn Header="Название" Binding="{Binding Title}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextWrapping" Value="Wrap"/>
-                                <Setter Property="TextAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
-                    <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
-
-                    <DataGridTemplateColumn Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 5 0">
-                                    <Button x:Name="editBtn" Style="{StaticResource DataGridButton}">
-                                        <Icon:PackIconMaterial Kind="PencilOutline"
-                                                               Style="{StaticResource ButtonIcon}"/>
-                                    </Button>
-                                    <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}"
-                                        Command="{Binding Path=DataContext.NavigationViewModel.NavigateDataCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
-                                        <Icon:PackIconMaterial Kind="DeleteOutline"
-                                                               Style="{StaticResource ButtonIcon}"/>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource AddButton}"
-                    Command="{Binding NavigationViewModel.NavigateAddCommand}">
-                <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
-            </Button>
-        </Grid>
-
-        <Grid Grid.Column="1" Background="#FF3F374C">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="90*"/>
-                <ColumnDefinition Width="10"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="17"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="17"/>
-            </Grid.RowDefinitions>
-
-            <Border Grid.Row="1" Grid.Column="1" Background="#FFC4C8EA"/>
-            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="IBeam" Background="Black" 
-                            Content="{Binding CurrentViewModel}">
-                <ContentControl.Resources>
-                    <DataTemplate x:Name="addViewTemplate" DataType="{x:Type viewmodels:AddViewModel}">
-                        <views:AddView/>
-                    </DataTemplate>
-                    <DataTemplate x:Name="dataViewTemplate" DataType="{x:Type viewmodels:DataViewModel}">
-                        <views:DataView/>
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-        </Grid>
-
-    </Grid>
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate x:Name="addViewTemplate" DataType="{x:Type viewmodels:AddViewModel}">
+                    <views:AddView/>
+                </DataTemplate>
+                <DataTemplate x:Name="dataViewTemplate" DataType="{x:Type viewmodels:DataViewModel}">
+                    <views:DataView/>
+                </DataTemplate>
+                <DataTemplate x:Name="LayoutTemplate" DataType="{x:Type viewmodels:LayoutViewModel}">
+                    <components:Layout/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
 </Window>
