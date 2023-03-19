@@ -9,11 +9,14 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:components="clr-namespace:UNTC.Components"
         mc:Ignorable="d" MinHeight="450" MinWidth="800"
-        Title="UNTC" Height="450" Width="800">
+        Title="UNTC" Height="450" Width="800" Icon="/Resources/oil.png">
         <ContentControl Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
                 <DataTemplate x:Name="addViewTemplate" DataType="{x:Type viewmodels:AddViewModel}">
                     <views:AddView/>
+                </DataTemplate>
+                <DataTemplate x:Name="editViewTemplate" DataType="{x:Type viewmodels:EditViewModel}">
+                    <views:EditView/>
                 </DataTemplate>
                 <DataTemplate x:Name="dataViewTemplate" DataType="{x:Type viewmodels:DataViewModel}">
                     <views:DataView/>

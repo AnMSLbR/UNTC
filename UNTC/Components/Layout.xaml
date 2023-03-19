@@ -22,7 +22,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="17"/>
                 <RowDefinition Height="360*"/>
-                <!--<RowDefinition Height="29*" MaxHeight="60"/>-->
                 <RowDefinition Height="17"/>
             </Grid.RowDefinitions>
 
@@ -43,7 +42,7 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="1" Grid.Column="1" Background="#FFC4C8EA"/>
-            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="IBeam" Background="Black" 
+            <ContentControl Grid.Row="1" Grid.Column="1" Cursor="Arrow" Background="Black" 
                             Content="{Binding BoreholeViewModel}"/>
         </Grid>
     </Grid>

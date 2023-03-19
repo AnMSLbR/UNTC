@@ -27,6 +27,7 @@ namespace UNTC
 
             services.AddTransient<DataViewModel>();
             services.AddTransient<AddViewModel>(s => new AddViewModel(s.GetRequiredService<BoreholeStore>(), CreateDataNavigationService(s)));
+            services.AddTransient<EditViewModel>(s => new EditViewModel(s.GetRequiredService<BoreholeStore>(), CreateDataNavigationService(s)));
             services.AddTransient<CommonViewModel>(s => new CommonViewModel(s.GetRequiredService<BoreholeStore>(), () => s.GetRequiredService<NavigationViewModel>()));
 
             services.AddSingleton<MainViewModel>();
@@ -66,9 +67,20 @@ namespace UNTC
                 () => serviceProvider.GetRequiredService<AddViewModel>(),
                 () => serviceProvider.GetRequiredService<CommonViewModel>());
         }
+        private INavigationService CreateEditNavigationService(IServiceProvider serviceProvider)
+        {
+            var boreholeStore = serviceProvider.GetService<BoreholeStore>();
+            return new LayoutNavigationService<EditViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<EditViewModel>(),
+                () => serviceProvider.GetRequiredService<CommonViewModel>());
+        }
+
         private NavigationViewModel CreateNavigationViewModel(IServiceProvider serviceProvider)
         {
-            return new NavigationViewModel(CreateDataNavigationService(serviceProvider), CreateAddNavigationService(serviceProvider));
+            return new NavigationViewModel(CreateDataNavigationService(serviceProvider), 
+                CreateAddNavigationService(serviceProvider),
+                CreateEditNavigationService(serviceProvider));
         }
     }
 }

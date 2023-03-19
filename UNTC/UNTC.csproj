@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
@@ -109,6 +110,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommonViewModel.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
+    <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
@@ -117,6 +119,9 @@
     </Compile>
     <Compile Include="Views\DataView.xaml.cs">
       <DependentUpon>DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditView.xaml.cs">
+      <DependentUpon>EditView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\BoreholeDataGrid.xaml">
       <SubType>Designer</SubType>
@@ -143,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,11 +186,28 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\oil.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist lib mkdir lib
-if exist $(TargetDir)cs-CZ move /Y $(TargetDir)cs-CZ $(TargetDir)lib\cs-CZ
+if exist $(TargetDir)lib\cs-CZ RD /S /Q $(TargetDir)lib\cs-CZ
+if exist $(TargetDir)lib\de RD /S /Q $(TargetDir)lib\de
+if exist $(TargetDir)lib\es RD /S /Q $(TargetDir)lib\es
+if exist $(TargetDir)lib\fr RD /S /Q $(TargetDir)lib\fr
+if exist $(TargetDir)lib\hu RD /S /Q $(TargetDir)lib\hu
+if exist $(TargetDir)lib\it RD /S /Q $(TargetDir)lib\it
+if exist $(TargetDir)lib\ja-JP RD /S /Q $(TargetDir)lib\ja-JP
+if exist $(TargetDir)lib\nl-BE RD /S /Q $(TargetDir)lib\nl-BE
+if exist $(TargetDir)lib\pt-BR RD /S /Q $(TargetDir)lib\pt-BR
+if exist $(TargetDir)lib\ro RD /S /Q $(TargetDir)lib\ro
+if exist $(TargetDir)lib\ru RD /S /Q $(TargetDir)lib\ru
+if exist $(TargetDir)lib\sv RD /S /Q $(TargetDir)lib\sv
+if exist $(TargetDir)lib\zh-Hans RD /S /Q $(TargetDir)lib\zh-Hans
+if exist $(TargetDir)cs-CZ move  /Y $(TargetDir)cs-CZ $(TargetDir)lib\cs-CZ
 if exist $(TargetDir)de move /Y $(TargetDir)de $(TargetDir)lib\de
 if exist $(TargetDir)es move /Y $(TargetDir)es $(TargetDir)lib\es
 if exist $(TargetDir)fr move /Y $(TargetDir)fr $(TargetDir)lib\fr
