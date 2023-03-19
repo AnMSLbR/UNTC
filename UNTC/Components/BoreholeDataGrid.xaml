@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:loc="clr-namespace:UNTC"
              xmlns:local="clr-namespace:UNTC.Components"
              mc:Ignorable="d" 
@@ -14,10 +15,10 @@
             <RowDefinition Height="29*" MaxHeight="60"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
+        <DataGrid x:Name="dg_Boreholes" Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
                       RowStyle="{DynamicResource DataGridRowStyle}"
-                      Grid.Row="0"
+                      Grid.Row="0" SelectedItem="{Binding SelectedBorehole, Mode=TwoWay}"
                       ItemsSource="{Binding Boreholes}">
             <DataGrid.Columns>
 
@@ -32,7 +33,7 @@
                 <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
                 <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
 
-                <DataGridTemplateColumn Width="Auto"> 
+                <DataGridTemplateColumn Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 5 0">
@@ -56,6 +57,12 @@
         <Button Grid.Row="2" Style="{StaticResource AddButton}"
                     Command="{Binding NavigationViewModel.NavigateAddCommand}">
             <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource ButtonIcon}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:ChangePropertyAction TargetObject="{Binding ElementName=dg_Boreholes}" 
+                                            PropertyName="SelectedItem" Value="{x:Null}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Button>
 
     </Grid>

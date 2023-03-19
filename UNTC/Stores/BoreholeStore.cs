@@ -11,6 +11,9 @@ namespace UNTC.Stores
     internal class BoreholeStore
     {
         private Borehole _currentBorehole;
+
+        public event EventHandler CurrentBoreholeChanged;
+
         public ObservableCollection<Borehole> BoreholeList { get; set; }
 
         public Borehole CurrentBorehole 
@@ -18,7 +21,8 @@ namespace UNTC.Stores
             get => _currentBorehole; 
             set 
             { 
-                _currentBorehole = value; 
+                _currentBorehole = value;
+                OnPropertyChanged();
             }
         }
 
@@ -30,6 +34,10 @@ namespace UNTC.Stores
                 new Borehole{ Title="Скважина 2", Depth=241, Density=0.85},
                 new Borehole{ Title="Скважина 3", Depth=472, Density=0.91},
             };
+        }
+        protected void OnPropertyChanged()
+        {
+            CurrentBoreholeChanged?.Invoke(this, new EventArgs());
         }
     }
 }

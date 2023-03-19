@@ -23,6 +23,7 @@ namespace UNTC.Commands
         public override void Execute(object parameter)
         {
             _boreholeStore.BoreholeList.Add(_borehole);
+            _boreholeStore.CurrentBorehole = _borehole;
         }
     }
 }

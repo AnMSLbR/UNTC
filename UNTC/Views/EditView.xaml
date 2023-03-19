@@ -58,7 +58,8 @@
                 </i:Interaction.Triggers>
             </Button>
             <Button Grid.Column="1" VerticalAlignment="Top" Margin="5 20 0 0"
-                Content="Отмена" FontSize="14" Style="{StaticResource AddButton}" Height="36"/>
+                Content="Отмена" FontSize="14" Style="{StaticResource AddButton}" Height="36"
+                    Command="{Binding NavigateDataCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

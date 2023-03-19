@@ -16,7 +16,7 @@ namespace UNTC.ViewModels
         private string _title;
         private string _depth;
         private string _density;
-        private Borehole _borehole;
+        private BoreholeStore _boreholeStore;
 
         public string Title
         {
@@ -47,10 +47,21 @@ namespace UNTC.ViewModels
         }
         public DataViewModel(BoreholeStore boreholeStore)
         {
-            _borehole = boreholeStore.CurrentBorehole;
-            Title = _borehole?.Title;
-            Depth = _borehole?.Depth.ToString();
-            Density = _borehole?.Density.ToString();
+            _boreholeStore = boreholeStore;        
+            _boreholeStore.CurrentBoreholeChanged += OnCurrentBoreholeChanged;
+            SetProperties();
+        }
+
+        private void OnCurrentBoreholeChanged(object sender, EventArgs e)
+        {
+            SetProperties();
+        }
+
+        private void SetProperties()
+        {
+            Title = _boreholeStore.CurrentBorehole?.Title;
+            Depth = _boreholeStore.CurrentBorehole?.Depth.ToString();
+            Density = _boreholeStore.CurrentBorehole?.Density.ToString();
         }
     }
 }
