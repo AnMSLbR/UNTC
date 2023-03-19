@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,37 +14,61 @@ namespace UNTC
 {
     public partial class App : Application
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly BoreholeStore _boreholeStore;
+        private readonly IServiceProvider _serviceProvider;
 
         public App()
         {
-            _navigationStore = new NavigationStore();
-            _boreholeStore = new BoreholeStore();
+            IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<NavigationStore>();
+            services.AddSingleton<BoreholeStore>();
+            services.AddSingleton<INavigationService>(s => CreateDataNavigationService(s));
+            
+            services.AddSingleton<NavigationViewModel>(CreateNavigationViewModel);
+
+            services.AddTransient<DataViewModel>();
+            services.AddTransient<AddViewModel>(s => new AddViewModel(s.GetRequiredService<BoreholeStore>(), CreateDataNavigationService(s)));
+            services.AddTransient<CommonViewModel>(s => new CommonViewModel(s.GetRequiredService<BoreholeStore>(), () => s.GetRequiredService<NavigationViewModel>()));
+
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<MainWindow>(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
+            
+            _serviceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            INavigationService dataNavigationService = CreateDataNavigationService();
-            dataNavigationService.Navigate();
-            new MainWindow() { DataContext = new MainViewModel(_navigationStore) }.Show();
+            INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
+            initialNavigationService.Navigate();
+
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow.Show();
+            
             base.OnStartup(e);
         }
 
-        private INavigationService CreateDataNavigationService()
+        private INavigationService CreateDataNavigationService(IServiceProvider serviceProvider)
         {
+            var boreholeStore = serviceProvider.GetService<BoreholeStore>();
             return new LayoutNavigationService<DataViewModel>(
-                _navigationStore, () => new DataViewModel(_boreholeStore), () => new CommonViewModel(_boreholeStore, CreateNevigationViewModel));
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<DataViewModel>(),
+                () => serviceProvider.GetRequiredService<CommonViewModel>());
         }
 
-        private INavigationService CreateAddNavigationService()
+        private INavigationService CreateAddNavigationService(IServiceProvider serviceProvider)
         {
+            var boreholeStore = serviceProvider.GetService<BoreholeStore>();
             return new LayoutNavigationService<AddViewModel>(
-                _navigationStore, () => new AddViewModel(_boreholeStore, CreateDataNavigationService()), () => new CommonViewModel(_boreholeStore, CreateNevigationViewModel));
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<AddViewModel>(),
+                () => serviceProvider.GetRequiredService<CommonViewModel>());
         }
-        private NavigationViewModel CreateNevigationViewModel()
+        private NavigationViewModel CreateNavigationViewModel(IServiceProvider serviceProvider)
         {
-            return new NavigationViewModel(CreateDataNavigationService(), CreateAddNavigationService());
+            return new NavigationViewModel(CreateDataNavigationService(serviceProvider), CreateAddNavigationService(serviceProvider));
         }
     }
 }

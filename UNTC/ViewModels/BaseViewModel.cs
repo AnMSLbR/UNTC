@@ -12,7 +12,6 @@ namespace UNTC.ViewModels
     internal class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        //public ICommand NavigateCommand { get; set; }
 
         protected void OnPropertyChanged(string name = null)
         {

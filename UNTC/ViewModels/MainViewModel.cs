@@ -15,13 +15,10 @@ namespace UNTC.ViewModels
     {
         private readonly NavigationStore _navigationStore;
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
-        //public ObservableCollection<Borehole> Boreholes { get; set; }
-        //public NavigationViewModel NavigationViewModel { get; }
 
-        public MainViewModel(NavigationStore navigationStore/*, NavigationViewModel navigationViewModel*/)
+        public MainViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            //NavigationViewModel = navigationViewModel;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 

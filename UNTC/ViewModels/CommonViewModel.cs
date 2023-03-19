@@ -14,15 +14,10 @@ namespace UNTC.ViewModels
         public ObservableCollection<Borehole> Boreholes { get; set; }
         public NavigationViewModel NavigationViewModel { get; set; }
 
-        //public CommonViewModel(NavigationViewModel navigationViewModel)
-        //{
-
-        //}
-
-        public CommonViewModel(BoreholeStore boreholeStore, Func<NavigationViewModel> createNevigationViewModel)
+        public CommonViewModel(BoreholeStore boreholeStore, Func<NavigationViewModel> createNavigationViewModel)
         {
             Boreholes = boreholeStore.BoreholeList;
-            NavigationViewModel = createNevigationViewModel();
+            NavigationViewModel = createNavigationViewModel();
         }
     }
 }

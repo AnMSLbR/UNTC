@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net46\MahApps.Metro.IconPacks.Core.dll</HintPath>
@@ -41,18 +44,26 @@
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.1.1\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -155,7 +166,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -166,4 +179,39 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist lib mkdir lib
+if exist $(TargetDir)cs-CZ move /Y $(TargetDir)cs-CZ $(TargetDir)lib\cs-CZ
+if exist $(TargetDir)de move /Y $(TargetDir)de $(TargetDir)lib\de
+if exist $(TargetDir)es move /Y $(TargetDir)es $(TargetDir)lib\es
+if exist $(TargetDir)fr move /Y $(TargetDir)fr $(TargetDir)lib\fr
+if exist $(TargetDir)hu move /Y $(TargetDir)hu $(TargetDir)lib\hu
+if exist $(TargetDir)it move /Y $(TargetDir)it $(TargetDir)lib\it
+if exist $(TargetDir)ja-JP move /Y $(TargetDir)ja-JP $(TargetDir)lib\ja-JP
+if exist $(TargetDir)MahApps.Metro.IconPacks.Core.dll move /Y $(TargetDir)MahApps.Metro.IconPacks.Core.dll $(TargetDir)lib\MahApps.Metro.IconPacks.Core.dll
+if exist $(TargetDir)MahApps.Metro.IconPacks.Core.pdb move /Y $(TargetDir)MahApps.Metro.IconPacks.Core.pdb $(TargetDir)lib\MahApps.Metro.IconPacks.Core.pdb
+if exist $(TargetDir)MahApps.Metro.IconPacks.Core.xml move /Y $(TargetDir)MahApps.Metro.IconPacks.Core.xml $(TargetDir)lib\MahApps.Metro.IconPacks.Core.xml
+if exist $(TargetDir)MahApps.Metro.IconPacks.Material.dll move /Y $(TargetDir)MahApps.Metro.IconPacks.Material.dll $(TargetDir)lib\MahApps.Metro.IconPacks.Material.dll
+if exist $(TargetDir)MahApps.Metro.IconPacks.Material.pdb move /Y $(TargetDir)MahApps.Metro.IconPacks.Material.pdb $(TargetDir)lib\MahApps.Metro.IconPacks.Material.pdb
+if exist $(TargetDir)MahApps.Metro.IconPacks.Material.xml move /Y $(TargetDir)MahApps.Metro.IconPacks.Material.xml $(TargetDir)lib\MahApps.Metro.IconPacks.Material.xml
+if exist $(TargetDir)Microsoft.Extensions.DependencyInjection.Abstractions.dll move /Y $(TargetDir)Microsoft.Extensions.DependencyInjection.Abstractions.dll $(TargetDir)lib\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+if exist $(TargetDir)Microsoft.Extensions.DependencyInjection.Abstractions.xml move /Y $(TargetDir)Microsoft.Extensions.DependencyInjection.Abstractions.xml $(TargetDir)lib\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+if exist $(TargetDir)Microsoft.Extensions.DependencyInjection.dll move /Y $(TargetDir)Microsoft.Extensions.DependencyInjection.dll $(TargetDir)lib\Microsoft.Extensions.DependencyInjection.dll
+if exist $(TargetDir)Microsoft.Extensions.DependencyInjection.xml move /Y $(TargetDir)Microsoft.Extensions.DependencyInjection.xml $(TargetDir)lib\Microsoft.Extensions.DependencyInjection.xml
+if exist $(TargetDir)Microsoft.Xaml.Behaviors.dll move /Y $(TargetDir)Microsoft.Xaml.Behaviors.dll $(TargetDir)lib\Microsoft.Xaml.Behaviors.dll
+if exist $(TargetDir)Microsoft.Xaml.Behaviors.pdb move /Y $(TargetDir)Microsoft.Xaml.Behaviors.pdb $(TargetDir)lib\Microsoft.Xaml.Behaviors.pdb
+if exist $(TargetDir)Microsoft.Xaml.Behaviors.xml move /Y $(TargetDir)Microsoft.Xaml.Behaviors.xml $(TargetDir)lib\Microsoft.Xaml.Behaviors.xml
+if exist $(TargetDir)nl-BE move /Y $(TargetDir)nl-BE $(TargetDir)lib\nl-BE
+if exist $(TargetDir)pt-BR move /Y $(TargetDir)pt-BR $(TargetDir)lib\pt-BR
+if exist $(TargetDir)ro move /Y $(TargetDir)ro $(TargetDir)lib\ro
+if exist $(TargetDir)ru move /Y $(TargetDir)ru $(TargetDir)lib\ru
+if exist $(TargetDir)sv move /Y $(TargetDir)sv $(TargetDir)lib\sv
+if exist $(TargetDir)Xceed.Wpf.AvalonDock.dll move /Y $(TargetDir)Xceed.Wpf.AvalonDock.dll $(TargetDir)lib\Xceed.Wpf.AvalonDock.dll
+if exist $(TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll move /Y $(TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll $(TargetDir)lib\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+if exist $(TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll move /Y $(TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll $(TargetDir)lib\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+if exist $(TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll move /Y $(TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll $(TargetDir)lib\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+if exist $(TargetDir)Xceed.Wpf.Toolkit.dll move /Y $(TargetDir)Xceed.Wpf.Toolkit.dll $(TargetDir)lib\Xceed.Wpf.Toolkit.dll
+if exist $(TargetDir)zh-Hans move /Y $(TargetDir)zh-Hans $(TargetDir)lib\zh-Hans
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -45,17 +45,12 @@ namespace UNTC.ViewModels
                 OnPropertyChanged(nameof(Density));
             }
         }
-        //public ICommand NavigateAddCommand { get; }
         public DataViewModel(BoreholeStore boreholeStore)
         {
-
             _borehole = boreholeStore.CurrentBorehole;
             Title = _borehole?.Title;
             Depth = _borehole?.Depth.ToString();
             Density = _borehole?.Density.ToString();
-
-            //NavigateAddCommand = new NavigateCommand<AddViewModel>(new NavigationService<AddViewModel>(
-            //    navigationStore, () => new AddViewModel(boreholeStore, navigationStore)));
         }
     }
 }
