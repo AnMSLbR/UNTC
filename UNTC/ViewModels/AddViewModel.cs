@@ -45,7 +45,6 @@ namespace UNTC.ViewModels
             }
         }
 
-
         public AddViewModel(BoreholeStore boreholeStore, INavigationService dataNavigationService)
         {
             _borehole = new Borehole();

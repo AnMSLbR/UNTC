@@ -23,7 +23,20 @@ namespace UNTC.Services
 
         public void Navigate()
         {
+            UnreferenceDataViewModel();
             _navigationStore.CurrentViewModel = new LayoutViewModel(_createNavigationViewModel(), _createViewModel());
+        }
+
+        private void UnreferenceDataViewModel()
+        {
+            if (_navigationStore.CurrentViewModel != null && _navigationStore.CurrentViewModel is LayoutViewModel)
+            {
+                LayoutViewModel currentViewModel = _navigationStore.CurrentViewModel as LayoutViewModel;
+                if (currentViewModel.BoreholeViewModel is DataViewModel)
+                {
+                    (currentViewModel.BoreholeViewModel as DataViewModel).UnsubscribeFromEvents();
+                }
+            }
         }
     }
 }

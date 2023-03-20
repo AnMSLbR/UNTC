@@ -13,55 +13,28 @@ namespace UNTC.ViewModels
 {
     internal class DataViewModel : BaseViewModel
     {
-        private string _title;
-        private string _depth;
-        private string _density;
         private BoreholeStore _boreholeStore;
+        public string Title { get => Borehole?.Title; }
+        public string Depth { get => Borehole?.Depth.ToString(); }
+        public string Density { get => Borehole?.Density.ToString(); }
+        public Borehole Borehole { get => _boreholeStore.CurrentBorehole; }
 
-        public string Title
-        {
-            get => _title;
-            set
-            {
-                _title = value;
-                OnPropertyChanged(nameof(Title));
-            }
-        }
-        public string Depth
-        {
-            get => _depth;
-            set
-            {
-                _depth = value;
-                OnPropertyChanged(nameof(Depth));
-            }
-        }
-        public string Density
-        {
-            get => _density;
-            set
-            {
-                _density = value;
-                OnPropertyChanged(nameof(Density));
-            }
-        }
         public DataViewModel(BoreholeStore boreholeStore)
         {
             _boreholeStore = boreholeStore;        
             _boreholeStore.CurrentBoreholeChanged += OnCurrentBoreholeChanged;
-            SetProperties();
         }
 
         private void OnCurrentBoreholeChanged(object sender, EventArgs e)
         {
-            SetProperties();
+            OnPropertyChanged(nameof(Title));
+            OnPropertyChanged(nameof(Depth));
+            OnPropertyChanged(nameof(Density));
         }
 
-        private void SetProperties()
+        public void UnsubscribeFromEvents()
         {
-            Title = _boreholeStore.CurrentBorehole?.Title;
-            Depth = _boreholeStore.CurrentBorehole?.Depth.ToString();
-            Density = _boreholeStore.CurrentBorehole?.Density.ToString();
+            _boreholeStore.CurrentBoreholeChanged -= OnCurrentBoreholeChanged;
         }
     }
 }
