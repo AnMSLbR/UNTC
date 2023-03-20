@@ -16,7 +16,7 @@ namespace UNTC.ViewModels
     {
         private Borehole _borehole;
         public ICommand NavigateDataCommand { get; }
-        public ICommand SaveBoreholeCommand { get; }
+        public ICommand AddBoreholeCommand { get; }
         public string Title 
         {
             get => _borehole.Title;
@@ -49,7 +49,7 @@ namespace UNTC.ViewModels
         {
             _borehole = new Borehole();
             NavigateDataCommand = new NavigateCommand(dataNavigationService);
-            SaveBoreholeCommand = new SaveBoreholeCommand(boreholeStore, _borehole);
+            AddBoreholeCommand = new AddBoreholeCommand(boreholeStore, _borehole);
         }
     }
 }

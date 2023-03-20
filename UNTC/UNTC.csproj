@@ -93,8 +93,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\EditBoreholeCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\SaveBoreholeCommand.cs" />
+    <Compile Include="Commands\AddBoreholeCommand.cs" />
     <Compile Include="Components\BoreholeDataGrid.xaml.cs">
       <DependentUpon>BoreholeDataGrid.xaml</DependentUpon>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace UNTC.Stores
 
         public event EventHandler CurrentBoreholeChanged;
 
-        public ObservableCollection<Borehole> BoreholeList { get; set; }
+        public BindingList<Borehole> BoreholeList { get; set; }
 
         public Borehole CurrentBorehole 
         { 
@@ -26,9 +27,11 @@ namespace UNTC.Stores
             }
         }
 
+        public int CurrentBoreholeIndex { get; set; }
+
         public BoreholeStore()
         {
-            BoreholeList = new ObservableCollection<Borehole>
+            BoreholeList = new BindingList<Borehole>
             {
                 new Borehole{ Title="Скважина 1", Depth=355, Density=0.89},
                 new Borehole{ Title="Скважина 2", Depth=241, Density=0.85},

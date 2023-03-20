@@ -31,18 +31,18 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Название" 
                    FontSize="14" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
         <TextBox Grid.Row="2" Grid.Column="1" FontSize="16" 
-                 VerticalAlignment="Center" Text="{Binding Title}"/>
+                 VerticalAlignment="Center" Text="{Binding Title, Mode=TwoWay}"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Глубина" 
                    FontSize="14" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
 
         <EToolkit:DoubleUpDown x:Name="TBDepth" Grid.Row="4" Grid.Column="1" FontSize="14"
                                VerticalAlignment="Center" PreviewTextInput="TBDepth_PreviewTextInput"
-                               ShowButtonSpinner="False" FlowDirection="RightToLeft" Value="{Binding Depth}" CultureInfo="ru-RU"/>
+                               ShowButtonSpinner="False" FlowDirection="RightToLeft" Value="{Binding Depth, Mode=TwoWay}" CultureInfo="ru-RU"/>
         <TextBlock Grid.Row="5" Grid.Column="1" Text="Плотность жидкости" 
                    FontSize="14" VerticalAlignment="Bottom" Margin="0 10 0 5"/>
         <EToolkit:DoubleUpDown x:Name="TBDensity" Grid.Row="6" Grid.Column="1" FontSize="14" FlowDirection="RightToLeft"
                  VerticalAlignment="Center" PreviewTextInput="TBDensity_PreviewTextInput"  ShowButtonSpinner="False"
-                               Value="{Binding Density}"/>
+                               Value="{Binding Density, Mode=TwoWay}"/>
         <Grid Grid.Row="7" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -52,7 +52,7 @@
                 Content="Сохранить" FontSize="14" Style="{StaticResource AddButton}" Height="36">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding SaveBoreholeCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding EditBoreholeCommand}"/>
                         <i:InvokeCommandAction Command="{Binding NavigateDataCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>

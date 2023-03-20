@@ -9,12 +9,12 @@ using UNTC.Stores;
 
 namespace UNTC.Commands
 {
-    internal class SaveBoreholeCommand : BaseCommand
+    internal class AddBoreholeCommand : BaseCommand
     {
         private readonly BoreholeStore _boreholeStore;
         private readonly Borehole _borehole;
 
-        public SaveBoreholeCommand(BoreholeStore boreholeStore, Borehole borehole)
+        public AddBoreholeCommand(BoreholeStore boreholeStore, Borehole borehole)
         {
             _boreholeStore = boreholeStore;
             _borehole = borehole;

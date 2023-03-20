@@ -52,7 +52,7 @@
                 Content="Сохранить" FontSize="14" Style="{StaticResource AddButton}" Height="36">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding SaveBoreholeCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding AddBoreholeCommand}"/>
                         <i:InvokeCommandAction Command="{Binding NavigateDataCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>

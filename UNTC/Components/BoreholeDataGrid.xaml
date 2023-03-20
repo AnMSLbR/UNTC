@@ -18,8 +18,8 @@
         <DataGrid x:Name="dg_Boreholes" Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
                       RowStyle="{DynamicResource DataGridRowStyle}"
-                      Grid.Row="0" SelectedItem="{Binding SelectedBorehole, Mode=TwoWay}"
-                      ItemsSource="{Binding Boreholes}">
+                      Grid.Row="0" SelectedItem="{Binding SelectedBorehole, Mode=TwoWay}" SelectedIndex="{Binding SelectedBoreholeIndex, Mode=OneWayToSource}"
+                      ItemsSource="{Binding Boreholes, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}">
@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
                 <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
 
-                <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn Width="Auto" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 5 0">
