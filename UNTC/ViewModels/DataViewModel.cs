@@ -23,19 +23,16 @@ namespace UNTC.ViewModels
 
         private BoreholeChart _chart;
         public SeriesCollection SeriesCollection { get => _chart.SeriesCollection; }
-        public string[] Labels { get => _chart.Labels; }
-        public Func<double, string> YFormatter { get => _chart.YFormatter; }
-
 
         public DataViewModel(BoreholeStore boreholeStore)
         {
             _boreholeStore = boreholeStore;
             _borehole = _boreholeStore.CurrentBorehole;
             _boreholeStore.CurrentBoreholeChanged += OnCurrentBoreholeChanged;
-            _chart = new BoreholeChart(_borehole, 10);
+
+            _chart = new BoreholeChart();
+            _chart.Build(_borehole);
         }
-
-
 
         private void OnCurrentBoreholeChanged(object sender, EventArgs e)
         {
@@ -43,10 +40,8 @@ namespace UNTC.ViewModels
             OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(Depth));
             OnPropertyChanged(nameof(Density));
-            _chart.Build(_borehole, 10);
+            _chart.Build(_borehole);
             OnPropertyChanged(nameof(SeriesCollection));
-            OnPropertyChanged(nameof(Labels));
-            OnPropertyChanged(nameof(YFormatter));
         }
 
         public void UnsubscribeFromEvents()

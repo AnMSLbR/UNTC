@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:charts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:components="clr-namespace:UNTC.Components"
              xmlns:local="clr-namespace:UNTC.Views"
              mc:Ignorable="d" 
              d:DesignHeight="416" d:DesignWidth="420">
@@ -19,23 +20,23 @@
             <Label Content="{Binding Density}"/>
         </StackPanel>
 
-
         <Grid Grid.Row="2" Background="#FFC4C8EA">
-            <charts:CartesianChart Background="Transparent" Margin="5"
-                                   Series="{Binding SeriesCollection}">
+            <charts:CartesianChart Background="Transparent" Margin="5 5 5 0"
+                                   Series="{Binding SeriesCollection}" FontSize="14"
+                                   Grid.Row="0" Grid.Column="1">
+                <charts:CartesianChart.DataTooltip>
+                    <components:CustomChartTooltip/>
+                </charts:CartesianChart.DataTooltip>
+
                 <charts:CartesianChart.AxisY>
-                    <charts:Axis LabelFormatter="{Binding YFormatter}" MinValue="0" Foreground="Black"/>
+                    <charts:Axis Title="Давление, кПа" MinValue="0" Foreground="Black" FontSize="14"/>
                 </charts:CartesianChart.AxisY>
+                
                 <charts:CartesianChart.AxisX>
-                    <charts:Axis Labels="{Binding Labels}" Foreground="Black">
-                        <charts:Axis.Separator>
-                            <charts:Separator Step="1"/>
-                        </charts:Axis.Separator>
-                    </charts:Axis>
+                    <charts:Axis Title="Глубина, м" MinValue="0" Foreground="Black" FontSize="14"/>
                 </charts:CartesianChart.AxisX>
+                
             </charts:CartesianChart>
         </Grid>
-
-
     </Grid>
 </UserControl>

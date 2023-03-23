@@ -105,10 +105,14 @@
     <Compile Include="Components\BoreholeDataGrid.xaml.cs">
       <DependentUpon>BoreholeDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\CustomChartTooltip.xaml.cs">
+      <DependentUpon>CustomChartTooltip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Layout.xaml.cs">
       <DependentUpon>Layout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BoreholeChart.cs" />
+    <Compile Include="Models\BoreholeChartPoint.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\LayoutNavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -132,6 +136,10 @@
       <DependentUpon>EditView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\BoreholeDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CustomChartTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

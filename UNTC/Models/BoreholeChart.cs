@@ -1,4 +1,5 @@
 ﻿using LiveCharts;
+using LiveCharts.Configurations;
 using LiveCharts.Wpf;
 using System;
 using System.Windows.Media;
@@ -7,54 +8,43 @@ namespace UNTC.Models
 {
     internal class BoreholeChart
     {
-        private Borehole _borehole;
-        private int _pointCount;
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> YFormatter { get; set; }
 
-        public BoreholeChart() { }
-
-        public BoreholeChart(Borehole borehole, int pointCount)
+        public BoreholeChart()
         {
-            _borehole = borehole;
-            _pointCount = pointCount;
-            Build(_borehole, _pointCount);
+            var BoreholeChartPointMapper = Mappers.Xy<BoreholeChartPoint>()
+                .X(value => value.Depth)
+                .Y(value => value.Pressure);
+            Charting.For<BoreholeChartPoint>(BoreholeChartPointMapper);
         }
 
-        public void Build(Borehole borehole, int pointCount)
+        public void Build(Borehole borehole)
         {
-            if (borehole?.Pressure != null)
+            if (borehole?.PressureAtStep != null)
             {
                 SeriesCollection = new SeriesCollection()
                 {
                     new LineSeries
                     {
-                        //Title = borehole.Title,
-                        Values = new ChartValues<double>(borehole.Pressure),
+                        Title = borehole.Title,
+                        Values = GetChartValues(borehole),
                         Fill = Brushes.Transparent,
                         Stroke = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF73549A"),
+                        PointGeometrySize = 10,
                     }
                 };
-
-                Labels = CalculateDepthLabels(borehole, pointCount);
-
-                YFormatter = value => value.ToString();
             }
         }
 
-        private string[] CalculateDepthLabels(Borehole borehole, int pointCount)
+        private ChartValues<BoreholeChartPoint> GetChartValues(Borehole borehole)
         {
-            var labels = new string[pointCount + 2];
-            labels[0] = "0";
-            var step = borehole.Depth / pointCount;
-            for (int i = 1; i <= pointCount; i++)
+            var count = borehole.PressureAtStep.Length;
+            var points = new BoreholeChartPoint[count];
+            for (int i = 0; i < count; i++)
             {
-                labels[i] = (step * i).ToString();
+                points[i] = new BoreholeChartPoint() { Pressure = borehole.PressureAtStep[i], Depth = borehole.DepthAtStep[i] };
             }
-            labels[pointCount + 1] = borehole.Depth.ToString();
-
-            return labels;
+            return new ChartValues<BoreholeChartPoint>(points);
         }
     }
 }
