@@ -33,9 +33,9 @@ namespace UNTC.Stores
         {
             BoreholeList = new BindingList<Borehole>
             {
-                new Borehole{ Title="Скважина 1", Depth=355, Density=0.89},
-                new Borehole{ Title="Скважина 2", Depth=241, Density=0.85},
-                new Borehole{ Title="Скважина 3", Depth=472, Density=0.91},
+                new Borehole{ Title="Скважина 1", Depth=355, Density=0.89, Pressure = new double[] { 0, 53, 78, 107, 155, 189, 217, 256, 312} },
+                new Borehole{ Title="Скважина 2", Depth=241, Density=0.85, Pressure = new double[] { 0, 48, 66, 120, 148, 191, 222, 273, 305} },
+                new Borehole{ Title="Скважина 3", Depth=472, Density=0.91, Pressure = new double[] { 0, 22, 45, 68, 108, 167, 203, 266, 289} },
             };
         }
         protected void OnPropertyChanged()

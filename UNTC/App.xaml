@@ -287,7 +287,7 @@
         </Style>
 
         <Style x:Key="DataGridButton" TargetType="Button">
-            <Setter Property="Background" Value="#FFC7BBD6"/>
+            <Setter Property="Background" Value="#FFA7ADE2"/>
             <Setter Property="BorderBrush" Value="#FF73549A"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -306,7 +306,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFA691C1"/>
+                    <Setter Property="Background" Value="#FF8E94CE"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
             </Style.Triggers>
@@ -319,7 +319,7 @@
         </Style>
 
         <Style x:Key="AddButton" TargetType="Button">
-            <Setter Property="Background" Value="#FFC7BBD6"/>
+            <Setter Property="Background" Value="#FFA7ADE2"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -334,7 +334,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFA691C1"/>
+                    <Setter Property="Background" Value="#FF8E94CE"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
             </Style.Triggers>

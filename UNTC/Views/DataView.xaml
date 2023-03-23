@@ -3,17 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:charts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:local="clr-namespace:UNTC.Views"
              mc:Ignorable="d" 
              d:DesignHeight="416" d:DesignWidth="420">
-    <Grid Background="#FFC4C8EA">
-        <Button Content="Переход" Height="37" Width="200" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,333,0,0"/>
-        <Label Content="Название" HorizontalAlignment="Left" Margin="33,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
-        <Label Content="Глубина" HorizontalAlignment="Left" Margin="33,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
-        <Label Content="Плотность" HorizontalAlignment="Left" Margin="33,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
-        <Label Content="{Binding Title}" HorizontalAlignment="Left" Margin="118,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
-        <Label Content="{Binding Depth}" HorizontalAlignment="Left" Margin="118,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
-        <Label Content="{Binding Density}" HorizontalAlignment="Left" Margin="118,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.489,0.594"/>
+    <Grid Background="#FF3F374C">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#FFC4C8EA">
+            <Label Content="{Binding Title}"/>
+            <Label Content="{Binding Depth}"/>
+            <Label Content="{Binding Density}"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="2" Background="#FFC4C8EA">
+            <charts:CartesianChart Background="Transparent" Margin="5"
+                                   Series="{Binding SeriesCollection}">
+                <charts:CartesianChart.AxisY>
+                    <charts:Axis LabelFormatter="{Binding YFormatter}" MinValue="0" Foreground="Black"/>
+                </charts:CartesianChart.AxisY>
+                <charts:CartesianChart.AxisX>
+                    <charts:Axis Labels="{Binding Labels}" Foreground="Black">
+                        <charts:Axis.Separator>
+                            <charts:Separator Step="1"/>
+                        </charts:Axis.Separator>
+                    </charts:Axis>
+                </charts:CartesianChart.AxisX>
+            </charts:CartesianChart>
+        </Grid>
+
+
     </Grid>
 </UserControl>

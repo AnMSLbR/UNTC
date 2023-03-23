@@ -41,6 +41,8 @@ namespace UNTC.Models
             }
         }
 
+        public double[] Pressure { get; set; } = null;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name = null)

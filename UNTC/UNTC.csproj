@@ -38,6 +38,12 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net46\MahApps.Metro.IconPacks.Core.dll</HintPath>
     </Reference>
@@ -102,6 +108,7 @@
     <Compile Include="Components\Layout.xaml.cs">
       <DependentUpon>Layout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\BoreholeChart.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\LayoutNavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -239,6 +246,11 @@ if exist $(TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll move /Y $(TargetDir)X
 if exist $(TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll move /Y $(TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll $(TargetDir)lib\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 if exist $(TargetDir)Xceed.Wpf.Toolkit.dll move /Y $(TargetDir)Xceed.Wpf.Toolkit.dll $(TargetDir)lib\Xceed.Wpf.Toolkit.dll
 if exist $(TargetDir)zh-Hans move /Y $(TargetDir)zh-Hans $(TargetDir)lib\zh-Hans
-</PostBuildEvent>
+if exist $(TargetDir)LiveCharts.dll move /Y $(TargetDir)LiveCharts.dll $(TargetDir)lib\LiveCharts.dll
+if exist $(TargetDir)LiveCharts.pdb move /Y $(TargetDir)LiveCharts.pdb $(TargetDir)lib\LiveCharts.pdb
+if exist $(TargetDir)LiveCharts.Wpf.dll move /Y $(TargetDir)LiveCharts.Wpf.dll $(TargetDir)lib\LiveCharts.Wpf.dll
+if exist $(TargetDir)LiveCharts.Wpf.pdb move /Y $(TargetDir)LiveCharts.Wpf.pdb $(TargetDir)lib\LiveCharts.Wpf.pdb
+if exist $(TargetDir)LiveCharts.Wpf.xml move /Y $(TargetDir)LiveCharts.Wpf.xml $(TargetDir)lib\LiveCharts.Wpf.xml
+if exist $(TargetDir)LiveCharts.xml move /Y $(TargetDir)LiveCharts.xml $(TargetDir)lib\LiveCharts.xml</PostBuildEvent>
   </PropertyGroup>
 </Project>
