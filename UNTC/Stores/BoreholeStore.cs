@@ -35,15 +35,31 @@ namespace UNTC.Stores
             {
                 new Borehole{ Title="Скважина 1", Depth=355, Density=0.89, 
                     PressureAtStep = new double[] { 0, 53, 78, 107, 155, 189, 217, 256, 312},
-                    DepthAtStep = new double[] { 0, 22, 48, 101, 157, 197, 236, 286 ,355} },
+                    DepthAtStep = new double[] { 0, 22, 48, 101, 157, 197, 236, 286 ,355},
+                    PressureDependence = BuildDependence(new double[] { 0, 53, 78, 107, 155, 189, 217, 256, 312}, new double[] { 0, 22, 48, 101, 157, 197, 236, 286 ,355}) },
+                    
                 new Borehole{ Title="Скважина 2", Depth=241, Density=0.85, 
                     PressureAtStep = new double[] { 0, 48, 66, 120, 148, 191, 222, 273, 305},
-                    DepthAtStep = new double[] { 0, 17, 53, 97, 155, 202, 222, 236 , 241 } },
+                    DepthAtStep = new double[] { 0, 17, 53, 97, 155, 202, 222, 236 , 241 },
+                    PressureDependence = BuildDependence(new double[] { 0, 48, 66, 120, 148, 191, 222, 273, 305}, new double[] { 0, 17, 53, 97, 155, 202, 222, 236 , 241 }) },
+
                 new Borehole{ Title="Скважина 3", Depth=472, Density=0.91, 
                     PressureAtStep = new double[] { 0, 22, 45, 68, 108, 167, 203, 266, 289},
-                    DepthAtStep = new double[] { 0, 33, 57, 101, 157, 256, 302, 387 , 472 } },
+                    DepthAtStep = new double[] { 0, 33, 57, 101, 157, 256, 302, 387 , 472 },
+                    PressureDependence = BuildDependence(new double[] { 0, 22, 45, 68, 108, 167, 203, 266, 289}, new double[] { 0, 33, 57, 101, 157, 256, 302, 387 , 472 }) },
             };
         }
+
+        private Dictionary<double, double> BuildDependence(double[] pressure, double[] depth)
+        {
+            var dependence = new Dictionary<double, double>();
+            for (int i = 0; i < pressure.Length; i++)
+            {
+                dependence.Add(depth[i], pressure[i]);
+            }
+            return dependence;
+        }
+
         protected void OnPropertyChanged()
         {
             CurrentBoreholeChanged?.Invoke(this, new EventArgs());

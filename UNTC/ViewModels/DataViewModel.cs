@@ -20,6 +20,8 @@ namespace UNTC.ViewModels
         public string Title { get => Borehole?.Title; }
         public string Depth { get => Borehole?.Depth.ToString(); }
         public string Density { get => Borehole?.Density.ToString(); }
+        public Dictionary<double, double> PressureDependence { get => Borehole?.PressureDependence; }
+        public bool IsBoreholeSelected { get => Borehole != null; }
 
         private BoreholeChart _chart;
         public SeriesCollection SeriesCollection { get => _chart.SeriesCollection; }
@@ -40,6 +42,8 @@ namespace UNTC.ViewModels
             OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(Depth));
             OnPropertyChanged(nameof(Density));
+            OnPropertyChanged(nameof(PressureDependence));
+            OnPropertyChanged(nameof(IsBoreholeSelected));
             _chart.Build(_borehole);
             OnPropertyChanged(nameof(SeriesCollection));
         }

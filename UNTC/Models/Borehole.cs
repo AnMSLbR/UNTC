@@ -43,6 +43,8 @@ namespace UNTC.Models
 
         public double[] PressureAtStep { get; set; } = null;
         public double[] DepthAtStep { get; set; } = null;
+        public Dictionary<double, double> PressureDependence { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -10,20 +10,40 @@
              d:DesignHeight="416" d:DesignWidth="420">
     <Grid Background="#FF3F374C">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="13"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="#FFC4C8EA">
-            <Label Content="{Binding Title}"/>
-            <Label Content="{Binding Depth}"/>
-            <Label Content="{Binding Density}"/>
-        </StackPanel>
+
+        <Grid Background="#FFC4C8EA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Title}" Margin="10"
+                       FontSize="14" FontWeight="DemiBold"/>
+
+            <DataGrid Grid.Row="1" Height="auto" HorizontalAlignment="Left"
+                      ItemsSource="{Binding PressureDependence}"
+                      Style="{DynamicResource pD_DataGridStyle}"
+                      ColumnHeaderStyle="{DynamicResource pD_ColumnHeaderStyle}"
+                      RowStyle="{DynamicResource pD_RowStyle}"
+                      CellStyle="{DynamicResource pD_CellStyle}"
+                      ScrollViewer.CanContentScroll="False"
+                      Visibility="{Binding IsBoreholeSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Глубина, м" Width="*" Binding="{Binding Key}"/>
+                    <DataGridTextColumn Header="Давление, кПа" Width="*" Binding="{Binding Value}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
         <Grid Grid.Row="2" Background="#FFC4C8EA">
             <charts:CartesianChart Background="Transparent" Margin="5 5 5 0"
                                    Series="{Binding SeriesCollection}" FontSize="14"
-                                   Grid.Row="0" Grid.Column="1">
+                                   Grid.Row="0" Grid.Column="1"
+                                   Visibility="{Binding IsBoreholeSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <charts:CartesianChart.DataTooltip>
                     <components:CustomChartTooltip/>
                 </charts:CartesianChart.DataTooltip>
@@ -31,11 +51,10 @@
                 <charts:CartesianChart.AxisY>
                     <charts:Axis Title="Давление, кПа" MinValue="0" Foreground="Black" FontSize="14"/>
                 </charts:CartesianChart.AxisY>
-                
+
                 <charts:CartesianChart.AxisX>
                     <charts:Axis Title="Глубина, м" MinValue="0" Foreground="Black" FontSize="14"/>
                 </charts:CartesianChart.AxisX>
-                
             </charts:CartesianChart>
         </Grid>
     </Grid>

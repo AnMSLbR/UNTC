@@ -30,8 +30,8 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Глубина" Binding="{Binding Depth}"/>
-                <DataGridTextColumn Header="Плотность" Binding="{Binding Density}"/>
+                <DataGridTextColumn Header="Глубина, м" Binding="{Binding Depth}"/>
+                <DataGridTextColumn Header="Плотность, кг/м3" Binding="{Binding Density}"/>
 
                 <DataGridTemplateColumn Width="Auto" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
