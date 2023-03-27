@@ -43,7 +43,7 @@
                                                                Style="{StaticResource ButtonIcon}"/>
                                 </Button>
                                 <Button x:Name="deleteBtn" Style="{StaticResource DataGridButton}"
-                                        Command="{Binding Path=DataContext.NavigationViewModel.NavigateDataCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
+                                        Command="{Binding Path=DataContext.DeleteBoreholeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
                                     <Icon:PackIconMaterial Kind="DeleteOutline"
                                                                Style="{StaticResource ButtonIcon}"/>
                                 </Button>
